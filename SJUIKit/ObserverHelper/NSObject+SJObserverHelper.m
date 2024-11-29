@@ -29,7 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation __SJKVOAutoremove
 - (void)dealloc {
     if ( _factor ) {
-        [_target removeObserver:_observer forKeyPath:_keyPath];
+        @try {
+            [_target removeObserver:_observer forKeyPath:_keyPath];
+        } @catch (NSException *exception) {}
         _factor = nil;
     }
 }
